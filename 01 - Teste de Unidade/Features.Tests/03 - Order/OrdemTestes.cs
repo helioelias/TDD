@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace Features.Tests._03___Order
+namespace Features.Tests
 {
+   [TestCaseOrderer("Features.Tests.PriorityOrderer", "Features.Tests")]
     public class OrdemTestes
     {
         public static bool Teste1Chamado;
@@ -14,7 +15,7 @@ namespace Features.Tests._03___Order
         public static bool Teste3Chamado;
         public static bool Teste4Chamado;
         
-        [Fact(DisplayName = "Teste 04")]
+        [Fact(DisplayName = "Teste 04"), TestPriority(3)]
         [Trait("Categoria", "Ordenacao Testes")]
         public void Test04()
         {
@@ -25,18 +26,19 @@ namespace Features.Tests._03___Order
             Assert.False(Teste2Chamado);
         }
 
-        [Fact(DisplayName = "Teste 03")]
+        [Fact(DisplayName = "Teste 03"), TestPriority(1)]
         [Trait("Categoria", "Ordenacao Testes")]
         public void Test03()
         {
             Teste3Chamado = true;
 
             Assert.False(Teste1Chamado);
-            Assert.False(Teste3Chamado);
             Assert.False(Teste4Chamado);
+            Assert.False(Teste2Chamado);
+
         }
 
-        [Fact(DisplayName = "Teste 01")]
+        [Fact(DisplayName = "Teste 01"), TestPriority(2)]
         [Trait("Categoria", "Ordenacao Testes")]
         public void Test01()
         {
@@ -47,7 +49,7 @@ namespace Features.Tests._03___Order
             Assert.False(Teste2Chamado);
         }
 
-        [Fact(DisplayName = "Teste 02")]
+        [Fact(DisplayName = "Teste 02"), TestPriority(4)]
         [Trait("Categoria", "Ordenacao Testes")]
         public void Test02()
         {
